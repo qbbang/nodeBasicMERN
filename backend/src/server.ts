@@ -51,8 +51,8 @@ app.use('*', (req, res, next) => {
 })
 
 // Assign Routes
-import router from "./routes/router"
-app.use('/', router);
+import router from "./middleware/router"
+app.use('/api', router);
 
 // Handle errors
 app.use(errorHandler());
