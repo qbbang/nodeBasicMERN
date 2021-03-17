@@ -33,7 +33,7 @@ export default {
             throw { code: s.BAD_REQUEST, message: 'You must check fields' };
         }
 
-        let validElements = req.body.array.filter( element => {
+        let validElements = req.body.filter( element => {
             return has(element, ['authCookie', 'roomId', 'roomName', 'senderId']);
         });
 
@@ -41,14 +41,29 @@ export default {
             throw { code: s.BAD_REQUEST, message: 'You must check fields' };
         }
 
-        var result = [];
-        validElements.array.forEach(element => {
-            let data = await webhookModel.create(element);
-            result.push({_id: data._id});
-        });
+        var data = [];
+        try {
+            validElements.forEach(async element => {
+                let hook = await webhookModel.create(element);
+                data.push({_id: hook._id});
+            });
+        } catch (e) {
+            throw { code: s.INTERNAL_SERVER_ERROR, message: e.message }
+        }
 
+        res.json({ status: true, message: 'success', data } );
+    },
 
-        res.json({ status: true, message: 'success', data._id });
+    async writeWebhookById(req, res) {
+        if (!has(req.params, 'id') || 
+            !has(req.body, ['authCookie', 'roomId', 'roomName', 'senderId'])) {
+            throw { code: s.BAD_REQUEST, message: 'You must check fields' };
+        }
+
+        let {id} = req.params;
+        let data = await webhookModel.update(id, req.body);
+
+        res.json({ status: true, message: 'success', data });
     },
 
     async deleteWebhook(req, res) {
@@ -56,7 +71,7 @@ export default {
             throw { code: s.BAD_REQUEST, message: 'You must check fields' };
         }
 
-        let validElements = req.body.array.filter( element => {
+        let validElements = req.body.filter( element => {
             return has(element, ['_id']);
         });
 
@@ -64,8 +79,8 @@ export default {
             throw { code: s.BAD_REQUEST, message: 'You must check fields' };
         }
 
-        validElements.array.forEach(element => {
-            let data = await webhookModel.destory(element);
+        validElements.forEach(async element => {
+            let data = await webhookModel.delete(element._id);
         });
 
         res.json({ status: true, message: 'success' });
@@ -78,7 +93,7 @@ export default {
 
         let {id} = req.params;
 
-        let data = await webhookModel.destory({where:{id}});
+        let data = await webhookModel.delete(id);
 
         res.json({ status: true, message: 'success' });
     },
