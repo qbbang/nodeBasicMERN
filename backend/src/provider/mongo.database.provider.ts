@@ -9,7 +9,7 @@ import {MongoClient} from "mongodb"
 
 let conn = new MongoClient(DB_URL, {useUnifiedTopology: true});
 
-module.exports = {
+export default {
     /**
      * Singleton-like Database Object that connects to the mongodb database
      */
