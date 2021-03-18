@@ -1,14 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import parser from 'body-parser';
 import compression from 'compression';
-import morgan from "morgan"
-import cookieParser from "cookie-parser"
-import helmet from "helmet"
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
 
+const swaggerUi = require('swagger-ui-express');
 
-import appRouter from "./router"
-import logger from "../util/logger"
+import appRouter from "./router";
+import * as swagger from "./swagger";
+import logger from "../util/logger";
+
 
 const handleBasic = (router: express.Router) => {
     // Configure custom logger middleware
@@ -20,6 +22,7 @@ const handleBasic = (router: express.Router) => {
     router.use(helmet());
 
     router.use('/api', appRouter);
+    router.use('/docs', swaggerUi.serve, swaggerUi.setup(swagger.swaggerSpec))
 }
 
 const handleBodyRequestParsing = (router: express.Router) => {

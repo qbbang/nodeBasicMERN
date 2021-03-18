@@ -13,7 +13,7 @@ const webhook = {
     async getById(id) {
         let dbo = await db.getDbo();
         let result = await dbo.collection('webhook').find({_id: new ObjectId(id)}).toArray();
-        return result;
+        return result.length > 0 ? result[0] : {};
     },
 
     async create(hook) {

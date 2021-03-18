@@ -3,6 +3,7 @@ import s from 'http-status';
 import has from 'has-keys';
 
 import webhookModel from './model';
+import daouMessangerProvider from '../../provider/daou.messanger.provider';
 
 export default {
     async getWebhook(req, res) {
@@ -98,4 +99,22 @@ export default {
         res.json({ status: true, message: 'success' });
     },
 
+    async sendHookMessage(req, res) {
+        if (!has(req.params, 'id') || !has(req.body, 'messsage')) {
+            throw { code: s.BAD_REQUEST, message: 'You must check fields' };
+        }
+
+        let {message} = req.body;
+        let {id} = req.params;
+        
+        let hook = webhookModel.getById(id);
+
+        if (!hook) {
+            throw { code: s.BAD_REQUEST, message: 'You must check fields' };
+        }
+
+        let data = await daouMessangerProvider.sendMessage(hook, message);
+        
+        res.json({ status: true, message: 'success', data });
+    }
 }
