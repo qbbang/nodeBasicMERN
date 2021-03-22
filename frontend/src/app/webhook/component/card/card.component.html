@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let hook of webhooks | async; index as i;">
+        <p>{{i}}. {{hook.roomName}}</p>
+        <p>RoomID: {{hook.roomId}}</p>
+    </li>
+</ul>

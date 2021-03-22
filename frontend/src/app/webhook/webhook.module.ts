@@ -10,12 +10,13 @@ import { WebhookFacade } from './webhook.facade';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WebhookApi } from './webhook.api';
 import { TokenInterceptor } from './webhook.interceptor';
+import { CardComponent } from './component/card/card.component';
 
 
 @NgModule({
   declarations: [
     IntroComponent, 
-    MainComponent,
+    MainComponent, CardComponent,
   ],
   imports: [
     CommonModule,
