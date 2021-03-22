@@ -15,9 +15,9 @@ import { Webhook, WebhookAdapter, WebhookResponse } from "./webhook.model";
     // 조건조회
     search(param): Observable<WebhookResponse> {
         let url = '/api/v1/webhook/read';
-        return this.http.get<WebhookResponse>(url, {headers: {'Content-Type': 'application/json'}});
-            // .pipe(map(data =>
-            //     this.adapter.adapt(data)));
+        return this.http.get<WebhookResponse>(url, {headers: {'Content-Type': 'application/json'}})
+            .pipe(map(data =>
+                this.adapter.adapt(data)));
     }
   
     // 저장/수정
