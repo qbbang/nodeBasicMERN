@@ -4,6 +4,7 @@ import compression from 'compression';
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
+import path from 'path';
 
 const swaggerUi = require('swagger-ui-express');
 
@@ -21,6 +22,7 @@ const handleBasic = (router: express.Router) => {
     router.use(cors());
     router.use(helmet());
 
+    router.use(express.static(path.join(__dirname,'..','..','..','public')));
     router.use('/api', appRouter);
     router.use('/docs', swaggerUi.serve, swaggerUi.setup(swagger.swaggerSpec))
 }
@@ -37,8 +39,11 @@ const handleCompression = (router: express.Router) => {
 
 const responseHeader = (router: express.Router) => {
     router.use('*', (req, res, next) => {
-        res.setHeader('Content-Type', 'application/json');
-        next();
+        res.sendFile(path.join(__dirname,'..','..','..','public/index.html'), function(err) {
+            if (err) {
+              res.status(500).send(err)
+            }
+          })
     });
 }
 
