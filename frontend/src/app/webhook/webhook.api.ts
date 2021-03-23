@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { Webhook, WebhookAdapter, WebhookResponse } from "./webhook.model";
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ import { Webhook, WebhookAdapter, WebhookResponse } from "./webhook.model";
   
     // 조건조회
     search(param): Observable<WebhookResponse> {
-        let url = '/api/v1/webhook/read';
+        let url = `${environment.apiBaseUrl}api/v1/webhook/read`;
         return this.http.get<WebhookResponse>(url, {headers: {'Content-Type': 'application/json'}})
             .pipe(map(data =>
                 this.adapter.adapt(data)));
@@ -22,14 +23,14 @@ import { Webhook, WebhookAdapter, WebhookResponse } from "./webhook.model";
   
     // 저장/수정
     save(data: any): Observable<any> {
-        let url = '/api/v1/webhook/write';
+        let url = `${environment.apiBaseUrl}api/v1/webhook/write`;
         return this.http.post<any>(url, data);
             // .pipe(map((res: Webhook) =>
             //     this.adapter.adapt(res)));
     }
     // 삭제
     delete(webhookId: string): Observable<any> {
-        let url = '/api/v1/webhook/delete';
+        let url = `${environment.apiBaseUrl}api/v1/webhook/delete`;
         return this.http.delete(`${url}/${webhookId}`);
     }
   }

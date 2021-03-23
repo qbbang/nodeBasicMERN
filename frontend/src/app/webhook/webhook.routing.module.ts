@@ -4,8 +4,8 @@ import { IntroComponent } from './container/intro/intro.component';
 import { MainComponent } from './container/main/main.component';
 
 const routes: Routes = [
-    { path:'intro', component: IntroComponent },
-    { path:'main', component: MainComponent },
+    { path:'webhook/intro', component: IntroComponent },
+    { path:'webhook/main', component: MainComponent },
 ];
 
 @NgModule({

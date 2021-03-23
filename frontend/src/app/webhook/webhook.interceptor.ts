@@ -16,7 +16,6 @@ export class TokenInterceptor implements HttpInterceptor {
     request = this.addXClient(request);
     request = this.addToken(request, 'token-string');
     return next.handle(request).pipe(catchError( error => {
-            console.log(error);
             return throwError(error);
         }));
   }

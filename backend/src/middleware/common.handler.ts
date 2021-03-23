@@ -10,14 +10,9 @@ const swaggerUi = require('swagger-ui-express');
 
 import appRouter from "./router";
 import * as swagger from "./swagger";
-import logger from "../util/logger";
 
 
 const handleBasic = (router: express.Router) => {
-    // Configure custom logger middleware
-    router.use(logger.dev, logger.combined);
-
-    router.use(morgan('dev'));
     router.use(cookieParser());
     router.use(cors());
     router.use(helmet());

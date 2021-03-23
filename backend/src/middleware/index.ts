@@ -30,4 +30,6 @@ export const applyRoutes = (routes: Route[], router: Router) => {
         (router as any)[method](path, handler);
     }
 };
-  
+
+module.exports.applyMiddleware = applyMiddleware;
+module.exports.applyRoutes = applyRoutes;
