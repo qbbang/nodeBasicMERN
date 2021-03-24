@@ -15,7 +15,7 @@ const router = express.Router();
 /**
  * @swagger
  * paths:
- *   /api/v1/webhook/read:
+ *   /kstm/api/v1/webhook/read:
  *     get:
  *       summary: 웹훅 조회
  *       tags: [Webhook]
@@ -39,7 +39,7 @@ router.route('/read').get(controll.getWebhook);
 /**
  * @swagger
  * paths:
- *   /api/v1/webhook/read/{id}:
+ *   /kstm/api/v1/webhook/read/{id}:
  *     get:
  *       summary: 웹훅 단건 조회
  *       tags: [Webhook]
