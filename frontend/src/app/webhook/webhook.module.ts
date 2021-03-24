@@ -11,12 +11,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WebhookApi } from './webhook.api';
 import { TokenInterceptor } from './webhook.interceptor';
 import { CardComponent } from './component/card/card.component';
+import { HelloComponent } from './container/hello/hello.component';
 
 
 @NgModule({
   declarations: [
     IntroComponent, 
-    MainComponent, CardComponent,
+    MainComponent, CardComponent, HelloComponent,
   ],
   imports: [
     CommonModule,

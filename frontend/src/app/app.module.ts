@@ -6,10 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { WebhookModule } from './webhook/webhook.module';
+import { IntroComponent } from './app/webhook/container/intro/intro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    IntroComponent,
   ],
   imports: [
     BrowserModule,
