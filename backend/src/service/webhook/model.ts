@@ -1,34 +1,40 @@
 
 import {ObjectId} from "mongodb"
-import db from '../../provider/mongo.database.provider';
 import { isObjectBindingPattern } from 'typescript';
+import MongoDBProvider from "../../provider/mongo.database.provider";
+
+const dbo = new MongoDBProvider('webhook');
+
+interface Webhook {
+    _id: string;
+    authCookie: string;
+    category: string;
+    roomId: string;
+    roomName: string;
+    senderId: string;
+}
 
 const webhook = {
     async getAll() {
-        let dbo = await db.getDbo();
-        let result = await dbo.collection('webhook').find().toArray();
+        let result = await dbo.find<Webhook>(null);
         return result;
     },
     
     async getById(id) {
-        let dbo = await db.getDbo();
-        let result = await dbo.collection('webhook').find({_id: new ObjectId(id)}).toArray();
+        let result = await dbo.find<Webhook>({_id: new ObjectId(id)});
         return result.length > 0 ? result[0] : {};
     },
 
     async create(hook) {
-        let dbo = await db.getDbo();
-        return (await dbo.collection('webhook').insertOne(hook)).ops[0];
+        return await dbo.insertOne<Webhook>(hook)
     },
 
     async update(id, hook) {
-        let dbo = await db.getDbo();
-        return await dbo.collection('webhook').findOneAndUpdate( {_id: new ObjectId(id)}, {$set: hook}, { returnNewDocument: true });
+        return await dbo.findOneAndUpdate<Webhook>({_id: new ObjectId(id)}, {$set: hook}, { returnNewDocument: true });
     },
 
     async delete(id) {
-        let dbo = await db.getDbo();
-        return dbo.collection('webhook').deleteOne({_id: new ObjectId(id)});
+        return dbo.deleteOne({_id: new ObjectId(id)});
     }
 }
 

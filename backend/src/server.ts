@@ -18,9 +18,11 @@ const app = express();
 import commonHandler from './middleware/common.handler';
 import errorHandler from './middleware/error.handler';
 import logHandler from './middleware/log.handler';
+import hostingHandler from './middleware/hosting.handler';
 
 applyMiddleware(logHandler, app);
 applyMiddleware(commonHandler, app);
+applyMiddleware(hostingHandler, app);
 applyMiddleware(errorHandler, app);
 
 
