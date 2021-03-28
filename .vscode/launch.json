@@ -49,5 +49,24 @@
                 "!**/node_modules/**"
             ],
         },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Firebase Function",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/backend",
+            "runtimeArgs": [
+                "run-script",
+                "firebase"
+            ],
+            "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/**",
+                "!**/node_modules/**"
+            ],
+        },
     ]
 }

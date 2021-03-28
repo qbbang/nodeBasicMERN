@@ -36,5 +36,8 @@
         "value": "https://asia-northeast1-node-basic-4a170.cloudfunctions.net"
       } ]
     } ]
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }

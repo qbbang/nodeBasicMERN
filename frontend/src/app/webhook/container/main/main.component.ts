@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WebhookFacade } from '../../webhook.facade';
-import { Webhook } from '../../webhook.model';
+import { Webhook } from '../../model/webhook.model';
 
 @Component({
   selector: 'mcr-main',

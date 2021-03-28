@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { WebhookApi } from "./webhook.api";
-import { Webhook, WebhookResponse } from "./webhook.model";
-import { WebhookState } from "./webhook.state";
+import { Webhook, WebhookResponse } from "./model/webhook.model";
+import { WebhookState } from "./state/webhook.state";
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 @Injectable()

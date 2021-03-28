@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { BehaviorSubject } from "rxjs";
-import { Pagination, Webhook } from "./webhook.model";
+import { Pagination, Webhook } from "../model/webhook.model";
 
 @Injectable()
 export class WebhookState {
